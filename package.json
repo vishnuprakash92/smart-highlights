@@ -1,0 +1,21 @@
+{
+  "name": "smart-highlights",
+  "version": "0.1.0",
+  "description": "Chrome extension: Smart Highlights",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts",
+    "format": "prettier --write .",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:e2e": "playwright test",
+    "prepare": "echo 'prepare script: install dev tools if needed'"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "prettier": "^2.8.8",
+    "vitest": "^0.34.1",
+    "playwright": "^1.43.0",
+    "@playwright/test": "^1.43.0"
+  }
+}

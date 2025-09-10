@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Smart Highlights Test Page</title>
+  </head>
+  <body>
+    <h1>Smart Highlights test page</h1>
+    <script>
+      // Listen for bridge replies
+      window.addEventListener('message', function onMsg(ev) {
+        var d = ev.data || {};
+        if (d && d.source === 'smart-highlights-sw' && d.id === 'test1') {
+          console.log('bridge reply', JSON.stringify(d.result));
+          window.removeEventListener('message', onMsg);
+        }
+      });
+
+      // Send test message to content-script bridge after a short delay so content script has time to load
+      console.log('posting test message to bridge (delayed)');
+      setTimeout(() => {
+        window.postMessage({ source: 'smart-highlights-popup', id: 'test1', type: 'analyze', text: 'hello' }, '*');
+      }, 500);
+    </script>
+  </body>
+</html>

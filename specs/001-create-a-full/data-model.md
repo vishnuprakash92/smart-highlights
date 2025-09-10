@@ -3,6 +3,7 @@
 ## Entities
 
 - Highlight
+
   - id: string (uuid)
   - text: string
   - pageUrl: string
@@ -11,6 +12,7 @@
   - timestamp: ISO8601
 
 - AnalysisResult
+
   - id: string (uuid)
   - highlightId: string (uuid)
   - summary: string
@@ -22,6 +24,7 @@
   - createdAt: ISO8601
 
 - ModelConfig
+
   - id: string
   - type: enum [local, remote]
   - endpoint: string
@@ -37,4 +40,5 @@
   - historyRetentionDays: integer
 
 ## Notes
+
 - All persisted data is stored via `chrome.storage.local` (or equivalent) with minimal fields to avoid PII. History is opt-in.

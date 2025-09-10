@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Smart Highlights - Options</title>
+  </head>
+  <body>
+    <h1>Smart Highlights - Options</h1>
+    <form id="options-form">
+      <label>
+        Backend URL
+        <input type="text" id="backendUrl" name="backendUrl" placeholder="http://localhost:8080/analyze" />
+      </label>
+      <br />
+      <label>
+        Mode
+        <select id="mode" name="mode">
+          <option value="local">Local</option>
+          <option value="remote">Remote</option>
+        </select>
+      </label>
+      <br />
+      <button type="button" id="save">Save</button>
+      <span id="status"></span>
+    </form>
+    <script src="options.js"></script>
+  </body>
+</html>

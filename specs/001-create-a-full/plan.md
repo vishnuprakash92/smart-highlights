@@ -4,6 +4,7 @@
 **Input**: Feature specification from `/home/vishnu/repo/chrome_plugin/smart-highlights/specs/001-create-a-full/spec.md`
 
 ## Execution Flow (/plan command scope)
+
 ```
 1. Load feature spec from Input path
    → If not found: ERROR "No feature spec at {path}"
@@ -25,15 +26,18 @@
 ```
 
 **IMPORTANT**: The /plan command STOPS at step 7. Phases 2-4 are executed by other commands:
+
 - Phase 2: /tasks command creates tasks.md
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
+
 Primary requirement: Provide a privacy-first, Manifest V3 Chrome extension that surfaces AI analysis (summary, explanation, translation) of user-highlighted text via popup and context menu, supporting configurable remote and local model backends.
 
 Technical approach: Implement a modular extension (content script, popup UI, service worker) that detects selections, routes analysis requests to configured backends (local or remote), persists minimal opt-in history via extension storage, and enforces privacy defaults.
 
 ## Technical Context
+
 - Language/Version: HTML/CSS/JavaScript (ES2022+) for extension UI and scripts; no backend language required by default.
 - Primary Dependencies: Chrome Extension Manifest V3 APIs, optional local model endpoints (LM Studio / Ollama) or remote AI APIs (user-provided).
 - Storage: chrome.storage.local for settings and optional opt-in history.
@@ -45,29 +49,36 @@ Technical approach: Implement a modular extension (content script, popup UI, ser
 - Scale/Scope: Single-extension scope; supports many users but no server-side scaling by default.
 
 ## Constitution Check
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
 **Simplicity**:
+
 - Projects: 1 (extension) — PASS
 - Use direct APIs; avoid unnecessary frameworks — PASS
 - Single, lightweight data model — PASS
 
 **Architecture**:
+
 - Modular extension components (content script, popup, service worker). No server required by default — PASS
 
 **Testing (NON-NEGOTIABLE)**:
+
 - TDD enforced in plan: contract tests generated first and must fail before implementation — PASS
 - Tests planned across contract, integration (E2E), and unit layers — PASS
 
 **Observability**:
+
 - Local structured error logs; telemetry opt-in only — PASS
 
 **Versioning**:
+
 - Use manifest versioning; follow semantic increments for releases — NOTE
 
 ## Project Structure
 
 ### Documentation (this feature)
+
 ```
 specs/001-create-a-full/
 ├── plan.md
@@ -80,6 +91,7 @@ specs/001-create-a-full/
 ```
 
 ### Source Code (repository root)
+
 ```
 # Option 1: Single project (DEFAULT)
 src/
@@ -119,8 +131,10 @@ ios/ or android/
 **Structure Decision**: [DEFAULT to Option 1 unless Technical Context indicates web/mobile app]
 
 ## Phase 0: Outline & Research
+
 1. **Extract unknowns from Technical Context** above:
-Completed. See `research.md` for decisions on:
+   Completed. See `research.md` for decisions on:
+
 - Data retention: opt-in history, default no persistence, configurable retention (30 days default)
 - Selection size limit: soft cap 10,000 chars with confirmation
 - Local backend integration: configurable localhost endpoints with guidance for security
@@ -129,7 +143,8 @@ Completed. See `research.md` for decisions on:
 **Output**: `/home/vishnu/repo/chrome_plugin/smart-highlights/specs/001-create-a-full/research.md`
 
 ## Phase 1: Design & Contracts
-*Prerequisites: research.md complete*
+
+_Prerequisites: research.md complete_
 
 Prerequisites satisfied (research.md complete). Outputs generated:
 
@@ -141,7 +156,8 @@ Prerequisites satisfied (research.md complete). Outputs generated:
 Next: create contract tests and integration test scenarios derived from user stories.
 
 ## Phase 2: Task Planning Approach
-*This section describes what the /tasks command will do - DO NOT execute during /plan*
+
+_This section describes what the /tasks command will do - DO NOT execute during /plan_
 This section describes the /tasks command output (do not execute during /plan). Summary:
 
 - Use `/templates/tasks-template.md` as base (not executed here).
@@ -149,6 +165,7 @@ This section describes the /tasks command output (do not execute during /plan). 
 - Ordering: contract tests -> data models -> services -> UI -> E2E -> polish.
 
 Estimated high-level tasks (for tasks.md):
+
 1. Create contract tests for `/analyze` (fail)
 2. Implement Highlight entity storage and APIs
 3. Implement AnalysisResult model and persistence (opt-in)
@@ -160,26 +177,28 @@ Estimated high-level tasks (for tasks.md):
 9. Implement local backend diagnostics and error handling
 10. Add E2E tests for highlight -> analyze -> result flow
 
-
 ## Phase 3+: Future Implementation
-*These phases are beyond the scope of the /plan command*
+
+_These phases are beyond the scope of the /plan command_
 
 **Phase 3**: Task execution (/tasks command creates tasks.md)  
 **Phase 4**: Implementation (execute tasks.md following constitutional principles)  
 **Phase 5**: Validation (run tests, execute quickstart.md, performance validation)
 
 ## Complexity Tracking
-*Fill ONLY if Constitution Check has violations that must be justified*
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+_Fill ONLY if Constitution Check has violations that must be justified_
 
+| Violation                  | Why Needed         | Simpler Alternative Rejected Because |
+| -------------------------- | ------------------ | ------------------------------------ |
+| [e.g., 4th project]        | [current need]     | [why 3 projects insufficient]        |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient]  |
 
 ## Progress Tracking
-*This checklist is updated during execution flow*
+
+_This checklist is updated during execution flow_
 **Phase Status**:
+
 - [x] Phase 0: Research complete (/plan command)
 - [x] Phase 1: Design complete (/plan command)
 - [x] Phase 2: Task planning approach described (/plan command)
@@ -188,10 +207,12 @@ Estimated high-level tasks (for tasks.md):
 - [ ] Phase 5: Validation passed
 
 **Gate Status**:
+
 - [x] Initial Constitution Check: PASS
 - [ ] Post-Design Constitution Check: PASS (re-check after contract tests)
 - [x] All NEEDS CLARIFICATION resolved (research.md records decisions)
 - [ ] Complexity deviations documented (none currently)
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+
+_Based on Constitution v2.1.1 - See `/memory/constitution.md`_

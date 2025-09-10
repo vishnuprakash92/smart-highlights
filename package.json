@@ -8,14 +8,19 @@
     "format": "prettier --write .",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test tests/e2e --config=tests/e2e/playwright.config.js",
+  "test:e2e:docker": "docker run --rm -v \"$PWD\":/work -w /work mcr.microsoft.com/playwright:v1.55.0-focal bash -lc 'npm ci && npx playwright test tests/e2e --config=tests/e2e/playwright.config.js'",
     "prepare": "echo 'prepare script: install dev tools if needed'"
   },
+  "files": ["src","manifest.json","icons","scripts"],
   "devDependencies": {
     "eslint": "^8.50.0",
     "prettier": "^2.8.8",
     "vitest": "^0.34.1",
+  "jsdom": "^21.1.0",
     "playwright": "^1.43.0",
-    "@playwright/test": "^1.43.0"
+  "@playwright/test": "^1.43.0",
+  "serve-static": "^1.15.0",
+  "finalhandler": "^1.2.0"
   }
 }
